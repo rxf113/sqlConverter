@@ -5,12 +5,14 @@ import com.alibaba.druid.sql.ast.SQLExpr;
 import com.alibaba.druid.sql.ast.SQLObjectImpl;
 import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.ast.expr.SQLIdentifierExpr;
-import com.alibaba.druid.sql.ast.statement.SQLExprTableSource;
-import com.alibaba.druid.sql.ast.statement.SQLSelectItem;
-import com.alibaba.druid.sql.ast.statement.SQLSelectQueryBlock;
+import com.alibaba.druid.sql.ast.expr.SQLQueryExpr;
+import com.alibaba.druid.sql.ast.statement.*;
+import com.alibaba.druid.sql.dialect.mysql.ast.statement.MySqlBinlogStatement;
 import com.alibaba.druid.sql.dialect.mysql.parser.MySqlStatementParser;
+import com.alibaba.druid.sql.dialect.mysql.visitor.MySqlOutputVisitor;
 import com.alibaba.druid.sql.parser.SQLStatementParser;
 import com.alibaba.druid.sql.visitor.SQLASTVisitorAdapter;
+import com.alibaba.druid.sql.visitor.SchemaStatVisitor;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -18,140 +20,133 @@ import java.util.stream.Collectors;
 /**
  * @author rxf113
  */
-public class DefaultSelectConverter implements Converter<SelectSqlObjectService>{
+public class DefaultSelectConverter{
 
-    private List<TableControl> controlList;
+    private SQLStatement sqlStatement;
 
-    {
-        controlList = new ArrayList<>();
-        controlList.add(new TableControl("ff", Collections.singletonList("d")));
-    }
+    private SelectSQLASTVisitorAdapterImpl visitorAdapter;
 
-    @Override
-    public SelectSqlObjectService sqlConvertObj(String sqlStr) {
+    public void initSQLStatement(String sqlStr) {
         SQLStatementParser parser = new MySqlStatementParser(sqlStr);
-        SQLStatement sqlStatement = parser.parseStatement();
-        SelectSQLASTVisitorAdapterImpl visitorAdapter = new SelectSQLASTVisitorAdapterImpl();
+        this.sqlStatement = parser.parseStatement();
+    }
+
+    /**
+     * 遍历指定的ast
+     *
+     * @param
+     * @return void
+     **/
+    public List<Table> traverseAST(SelectSQLASTVisitorAdapterImpl visitorAdapter){
+        this.visitorAdapter = visitorAdapter;
         sqlStatement.accept(visitorAdapter);
-        return visitorAdapter;
+        return visitorAdapter.getTables();
     }
 
-    private String getResolvedSql(List<String> fields,SQLSelectQueryBlock sqlSelectQueryBlock){
-        sqlSelectQueryBlock.getSelectList().removeIf(i -> {
-            SQLIdentifierExpr sqlIdentifierExpr = (SQLIdentifierExpr) i.getExpr();
-            String name = sqlIdentifierExpr.getName();
-            return fields.contains(name);
-        });
-        return sqlSelectQueryBlock.toString();
+    /**
+     * 遍历普通ast
+     *
+     * @param
+     * @return void
+     **/
+    public void traverseAST(SQLASTVisitorAdapter visitorAdapter){
+        sqlStatement.accept(visitorAdapter);
     }
 
-    private String createField(Table table){
-        String field;
-        String alias = table.getAlias();
-        String tableName = table.getTableName();
-        if (table.getAlias() != null){
-            field = tableName;
-        }else {
-            field = String.format("%s.%s",alias,tableName);
+    public void resolveFields(Map<Integer, List<String>> treatedFields,SelectSQLASTVisitorAdapterImpl visitorAdapter){
+        visitorAdapter.setTreatedFields(treatedFields);
+        sqlStatement.accept(visitorAdapter);
+    }
+
+    public void resolveFields(Map<Integer, List<String>> treatedFields){
+        resolveFields(treatedFields,this.visitorAdapter);
+    }
+
+    static class CusOutPut extends MySqlOutputVisitor {
+
+        public CusOutPut(Appendable appender) {
+            super(appender);
         }
-        return field;
+
+        public CusOutPut(Appendable appender, boolean parameterized) {
+            super(appender, parameterized);
+        }
+
+//        @Override
+//        public boolean visit(SQLSelectQueryBlock x) {
+//            List<SQLSelectItem> selectList = x.getSelectList();
+////            for (SQLSelectItem sqlSelectItem : selectList) {
+////                visit(sqlSelectItem);
+////            }
+//            //System.out.println( " ffff : " + x.toString());
+//            if(selectList.size() == 0){
+//
+//                //print0(null);
+//            }
+//            return true;
+//        }
+//
+//        @Override
+//        public boolean visit(SQLSelectItem x) {
+//            return true;
+//        }
+//
+//        @Override
+//        public boolean visit(SQLQueryExpr x) {
+//            //x.getSubQuery()
+//            //visit(x.getQueryBlock());
+//            return true;
+//        }
     }
 
-    static class SelectSQLASTVisitorAdapterImpl extends SQLASTVisitorAdapter implements SelectSqlObjectService{
+    /**
+     * 遍历ast
+     **/
+    static class SelectSQLASTVisitorAdapterImpl extends SQLASTVisitorAdapter {
 
-        private SQLObjectImpl sqlSelectQueryBlock;
-        private SQLObjectImpl sqlExprTableSource;
+        private Map<Integer, List<String>> treatedFields;
+
+        public SelectSQLASTVisitorAdapterImpl() {
+        }
+
+        public void setTreatedFields(Map<Integer, List<String>> treatedFields) {
+            this.treatedFields = treatedFields;
+        }
+
+        public SelectSQLASTVisitorAdapterImpl(Map<Integer, List<String>> treatedFields) {
+            this.treatedFields = treatedFields;
+        }
+
+        private List<Table> tables = new ArrayList<>();
+
+        public List<Table> getTables() {
+            return this.tables;
+        }
 
         @Override
         public boolean visit(SQLExprTableSource x) {
-            sqlExprTableSource = x;
+            String tableName = x.getName().getSimpleName();
+            String alias = x.getAlias();
+            tables.add(new Table(tableName, alias));
             return true;
         }
+
 
         @Override
         public boolean visit(SQLSelectQueryBlock x) {
-            sqlSelectQueryBlock = x;
+            if(treatedFields == null){
+                return true;
+            }
             //x.getSelectList()
-//            List<SQLSelectItem> selectItemList = x.getSelectList();
-//            selectItemList.remove(1);
-//            selectItemList.forEach(selectItem -> {
-//                System.out.println("attr:" + selectItem.getAttributes());
-//                SQLExpr expr = selectItem.getExpr();
-//                System.out.println("expr:" + SQLUtils.toMySqlString(selectItem.getExpr()));
-//            });
-//            System.out.println("table:" + SQLUtils.toMySqlString(x.getFrom()));
-            //System.out.println("where:" + SQLUtils.toMySqlString(x.getWhere()));
-            //System.out.println("order by:" + SQLUtils.toMySqlString(x.getOrderBy().getItems().get(0)));
-            //System.out.println("limit:" + SQLUtils.toMySqlString(x.getLimit()));
+            List<SQLSelectItem> selectItemList = x.getSelectList();
+            //移除
+            selectItemList.removeIf(i -> i.getExpr() instanceof SQLIdentifierExpr && Optional.ofNullable(treatedFields.get(1)).map(fields -> fields.contains(i.getExpr().toString())).orElse(false));
+
+
+            selectItemList.removeIf(i -> i.getExpr() instanceof SQLIdentifierExpr &&
+                    Optional.ofNullable(treatedFields.get(2)).map(fields -> !fields.contains(i.getExpr().toString())).orElse(false));
 
             return true;
-        }
-
-        @Override
-        public SQLObjectImpl getSelectQueryBlock() {
-            return this.sqlSelectQueryBlock;
-        }
-
-        @Override
-        public SQLObjectImpl getExprTableSource() {
-            return this.sqlExprTableSource;
-        }
-    }
-
-    static class TableControl implements Comparable{
-        public TableControl(String tableName, List<String> fields) {
-            this.tableName = tableName;
-            this.fields = fields;
-        }
-
-        private String tableName;
-        private List<String> fields;
-
-        public String getTableName() {
-            return tableName;
-        }
-
-        public void setTableName(String tableName) {
-            this.tableName = tableName;
-        }
-
-        public List<String> getFields() {
-            return fields;
-        }
-
-        public void setFields(List<String> fields) {
-            this.fields = fields;
-        }
-
-        @Override
-        public int compareTo(Object o) {
-            return 0;
-        }
-    }
-
-    static class Table{
-        public Table(String tableName, String alias) {
-            this.tableName = tableName;
-            this.alias = alias;
-        }
-
-        private String tableName;
-        private String alias;
-
-        public String getTableName() {
-            return tableName;
-        }
-
-        public void setTableName(String tableName) {
-            this.tableName = tableName;
-        }
-
-        public String getAlias() {
-            return alias;
-        }
-
-        public void setAlias(String alias) {
-            this.alias = alias;
         }
     }
 }
