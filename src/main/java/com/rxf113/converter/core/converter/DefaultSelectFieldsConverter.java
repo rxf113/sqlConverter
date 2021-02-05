@@ -6,6 +6,7 @@ import com.alibaba.druid.sql.dialect.mysql.visitor.MySqlOutputVisitor;
 import com.alibaba.druid.sql.parser.SQLStatementParser;
 import com.alibaba.druid.sql.visitor.SQLASTOutputVisitor;
 import com.alibaba.druid.sql.visitor.SQLASTVisitorAdapter;
+import com.rxf113.converter.core.enums.FieldControlTypeEnum;
 import com.rxf113.converter.core.unit.Table;
 import com.rxf113.converter.core.control.FieldsControl;
 import com.rxf113.converter.core.visitors.CusSelectFieldVisitorAdapter;
@@ -46,7 +47,7 @@ public class DefaultSelectFieldsConverter {
 
         List<Table> tables = converter.getTables();
 
-        Map<Integer, List<String>> assembledFields = converter.findAssembledFields(fieldsControls, tables);
+        Map<FieldControlTypeEnum, List<String>> assembledFields = converter.findAssembledFields(fieldsControls, tables);
         converter.resolveFields(assembledFields);
         return converter.getConvertedSql();
     }
@@ -78,12 +79,12 @@ public class DefaultSelectFieldsConverter {
     }
 
 
-    public void resolveFields(Map<Integer, List<String>> assembledFields, CusSelectFieldVisitorAdapter visitorAdapter) {
+    public void resolveFields(Map<FieldControlTypeEnum, List<String>> assembledFields, CusSelectFieldVisitorAdapter visitorAdapter) {
         visitorAdapter.setAssembledFields(assembledFields);
         sqlStatement.accept(visitorAdapter);
     }
 
-    public void resolveFields(Map<Integer, List<String>> assembledFields) {
+    public void resolveFields(Map<FieldControlTypeEnum, List<String>> assembledFields) {
         resolveFields(assembledFields, this.sqlAstVisitorAdapter);
     }
 
@@ -94,8 +95,8 @@ public class DefaultSelectFieldsConverter {
      * @param tables         表信息
      * @return Map<Integer, List < String>> key:type  val:组装字段集
      **/
-    public Map<Integer, List<String>> findAssembledFields(List<FieldsControl> fieldsControls, List<Table> tables) {
-        Map<Integer, List<FieldsControl>> fieldsControlMap = fieldsControls.stream().peek(fieldsControl -> {
+    public Map<FieldControlTypeEnum, List<String>> findAssembledFields(List<FieldsControl> fieldsControls, List<Table> tables) {
+        Map<FieldControlTypeEnum, List<FieldsControl>> fieldsControlMap = fieldsControls.stream().peek(fieldsControl -> {
             String tableName = fieldsControl.getTableName();
             //根据表名找到表信息
             List<Table> tableList = tables.stream().filter(table -> table.getTableName().equals(tableName)).collect(Collectors.toList());
@@ -108,9 +109,9 @@ public class DefaultSelectFieldsConverter {
                 treatedFields.addAll(cuTreatedFields);
             });
             fieldsControl.setFields(treatedFields);
-        }).collect(Collectors.groupingBy(FieldsControl::getType));
+        }).collect(Collectors.groupingBy(FieldsControl::getFieldControlTypeEnum));
 
-        Map<Integer, List<String>> resultMap = new HashMap<>(2, 1);
+        Map<FieldControlTypeEnum, List<String>> resultMap = new HashMap<>(2, 1);
         fieldsControlMap.forEach((k, v) -> {
             resultMap.put(k, v.stream().flatMap(i -> i.getFields().stream()).distinct().collect(Collectors.toList()));
         });

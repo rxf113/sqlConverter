@@ -1,5 +1,7 @@
 package com.rxf113.converter.core.control;
 
+import com.rxf113.converter.core.enums.FieldControlTypeEnum;
+
 import java.util.List;
 
 /**
@@ -11,7 +13,7 @@ public class FieldsControl {
     private String tableName;
 
     private List<String> fields;
-    private int type;
+    private FieldControlTypeEnum fieldControlTypeEnum;
 
     public String getTableName() {
         return tableName;
@@ -29,11 +31,11 @@ public class FieldsControl {
         this.fields = fields;
     }
 
-    public int getType() {
-        return type;
+    public FieldControlTypeEnum getFieldControlTypeEnum() {
+        return fieldControlTypeEnum;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setFieldControlTypeEnum(FieldControlTypeEnum fieldControlTypeEnum) {
+        this.fieldControlTypeEnum = fieldControlTypeEnum;
     }
 }

@@ -1,6 +1,7 @@
 package com.rxf113.converter.core.visitors;
 
 import com.alibaba.druid.sql.visitor.SQLASTVisitor;
+import com.rxf113.converter.core.enums.FieldControlTypeEnum;
 import com.rxf113.converter.core.unit.Table;
 
 import java.util.List;
@@ -22,5 +23,5 @@ public interface CusSelectFieldVisitorAdapter extends SQLASTVisitor {
      * 设置组装字段集
      * @param assembledFields 字段集
      */
-    void setAssembledFields(Map<Integer, List<String>> assembledFields);
+    void setAssembledFields(Map<FieldControlTypeEnum, List<String>> assembledFields);
 }
