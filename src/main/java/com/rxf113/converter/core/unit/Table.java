@@ -1,6 +1,8 @@
-package com.rxf113.converter.core;
+package com.rxf113.converter.core.unit;
 
 /**
+ * 表的基本信息
+ *
  * @author rxf113
  */
 public class Table {

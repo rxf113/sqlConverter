@@ -3,6 +3,8 @@ package com.rxf113.converter.core.control;
 import java.util.List;
 
 /**
+ * 查询字段控制
+ *
  * @author rxf113
  */
 public class FieldsControl {

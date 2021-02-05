@@ -2,12 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e66d890e-e955-40ba-868e-9e8dd9958864" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/control/FieldsControl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/converter/DefaultSelectFieldsConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/visitors/CusSelectFieldVisitorAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/visitors/CusSelectSQLASTVisitorAdapterImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/rxf113/converter/SelectFieldsTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/DefaultSelectConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/DefaultSelectConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/SelectSqlObjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/SelectSqlObjectService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/Converter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/DefaultSelectConverter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/Resolver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/SelectControlObj.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/SelectSqlObjectService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/unit/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/control/FieldsControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/control/FieldsControl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,20 +52,25 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RebelAgentSelection">
     <selection>jr</selection>
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.rxf113.converter" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.SelectFieldsTest.testSelectFields">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.rxf113.converter.core.Main" />
       <module name="sqlConverter" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.rxf113.converter.core.*" />
+          <option name="PATTERN" value="com.rxf113.converter.core.converter.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -64,8 +78,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SelectFieldsTest.testSelectFields" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sqlConverter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rxf113.converter.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.rxf113.converter" />
+      <option name="MAIN_CLASS_NAME" value="com.rxf113.converter.SelectFieldsTest" />
+      <option name="METHOD_NAME" value="testSelectFields" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.SelectFieldsTest.testSelectFields" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -81,6 +112,7 @@
       <option name="presentableId" value="Default" />
       <updated>1612336028640</updated>
       <workItem from="1612336032040" duration="35840000" />
+      <workItem from="1612488089896" duration="21529000" />
     </task>
     <servers />
   </component>
@@ -88,58 +120,74 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="233" y="2" key="#Project_Structure" timestamp="1612336052744">
+    <state x="233" y="2" key="#Project_Structure" timestamp="1612512405707">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="2" key="#Project_Structure/0.0.1280.680@0.0.1280.680" timestamp="1612336052744" />
-    <state x="446" y="49" key="#com.intellij.ide.util.MemberChooser" timestamp="1612425885455">
+    <state x="233" y="2" key="#Project_Structure/0.0.1280.680@0.0.1280.680" timestamp="1612512405707" />
+    <state x="328" y="197" key="#com.intellij.debugger.streams.ui.EvaluationAwareTraceWindow" timestamp="1612493616492">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="446" y="49" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1612425885455" />
+    <state x="328" y="197" key="#com.intellij.debugger.streams.ui.EvaluationAwareTraceWindow/0.0.1280.680@0.0.1280.680" timestamp="1612493616492" />
+    <state x="446" y="49" key="#com.intellij.ide.util.MemberChooser" timestamp="1612510587160">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="446" y="49" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1612510587160" />
+    <state x="430" y="207" width="421" height="271" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1612512488532">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="430" y="207" width="421" height="271" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1280.680@0.0.1280.680" timestamp="1612512488532" />
+    <state x="371" y="90" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1612511767041">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="371" y="90" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1612511767041" />
     <state x="321" y="11" key="#com.intellij.unscramble.UnscrambleDialog" timestamp="1612342763181">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="321" y="11" key="#com.intellij.unscramble.UnscrambleDialog/0.0.1280.680@0.0.1280.680" timestamp="1612342763181" />
-    <state x="316" y="97" width="829" height="583" key="#xdebugger.evaluate" timestamp="1612432634336">
+    <state x="451" y="97" width="829" height="583" key="#xdebugger.evaluate" timestamp="1612494705844">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="316" y="97" width="829" height="583" key="#xdebugger.evaluate/0.0.1280.680@0.0.1280.680" timestamp="1612432634336" />
-    <state width="684" height="438" key="DebuggerActiveHint" timestamp="1612427071712">
+    <state x="451" y="97" width="829" height="583" key="#xdebugger.evaluate/0.0.1280.680@0.0.1280.680" timestamp="1612494705844" />
+    <state width="684" height="438" key="DebuggerActiveHint" timestamp="1612512178203">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="684" height="438" key="DebuggerActiveHint/0.0.1280.680@0.0.1280.680" timestamp="1612427071712" />
-    <state width="1237" height="52" key="GridCell.Tab.0.bottom" timestamp="1612432755960">
+    <state width="684" height="438" key="DebuggerActiveHint/0.0.1280.680@0.0.1280.680" timestamp="1612512178203" />
+    <state width="1237" height="73" key="GridCell.Tab.0.bottom" timestamp="1612513899014">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="52" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1612432755960" />
-    <state width="1237" height="52" key="GridCell.Tab.0.center" timestamp="1612432755960">
+    <state width="1237" height="73" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1612513899014" />
+    <state width="1237" height="73" key="GridCell.Tab.0.center" timestamp="1612513899014">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="52" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1612432755960" />
-    <state width="1237" height="52" key="GridCell.Tab.0.left" timestamp="1612432755960">
+    <state width="1237" height="73" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1612513899014" />
+    <state width="1237" height="73" key="GridCell.Tab.0.left" timestamp="1612513899014">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="52" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1612432755960" />
-    <state width="1237" height="52" key="GridCell.Tab.0.right" timestamp="1612432755960">
+    <state width="1237" height="73" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1612513899014" />
+    <state width="1237" height="73" key="GridCell.Tab.0.right" timestamp="1612513899014">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="52" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1612432755960" />
-    <state width="1237" height="175" key="GridCell.Tab.1.bottom" timestamp="1612432755954">
+    <state width="1237" height="73" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1612513899014" />
+    <state width="1237" height="254" key="GridCell.Tab.1.bottom" timestamp="1612512227419">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="175" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1612432755954" />
-    <state width="1237" height="175" key="GridCell.Tab.1.center" timestamp="1612432755954">
+    <state width="1237" height="254" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1612512227419" />
+    <state width="1237" height="254" key="GridCell.Tab.1.center" timestamp="1612512227419">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="175" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1612432755954" />
-    <state width="1237" height="175" key="GridCell.Tab.1.left" timestamp="1612432755954">
+    <state width="1237" height="254" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1612512227419" />
+    <state width="1237" height="254" key="GridCell.Tab.1.left" timestamp="1612512227418">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="175" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1612432755954" />
-    <state width="1237" height="175" key="GridCell.Tab.1.right" timestamp="1612432755954">
+    <state width="1237" height="254" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1612512227418" />
+    <state width="1237" height="254" key="GridCell.Tab.1.right" timestamp="1612512227419">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="175" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1612432755954" />
+    <state width="1237" height="254" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1612512227419" />
+    <state x="171" y="0" key="Maven.ArtifactSearchDialog" timestamp="1612512545468">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="171" y="0" key="Maven.ArtifactSearchDialog/0.0.1280.680@0.0.1280.680" timestamp="1612512545468" />
     <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1612345199050">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -148,56 +196,18 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="297" y="151" width="672" height="677" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1612338906697" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1612402119397">
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1612489148373">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1612402119397" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1612489148373" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/Main.java</url>
-          <line>51</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/Main.java</url>
-          <line>68</line>
-          <properties>
-            <option name="lambda-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/Main.java</url>
-          <line>22</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/DefaultSelectConverter.java</url>
-          <line>140</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/DefaultSelectConverter.java</url>
-          <line>97</line>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/DefaultSelectConverter.java</url>
-          <line>85</line>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/DefaultSelectConverter.java</url>
-          <line>90</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/DefaultSelectConverter.java</url>
-          <line>76</line>
-          <option name="timeStamp" value="39" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/visitors/CusSelectSQLASTVisitorAdapterImpl.java</url>
+          <line>93</line>
+          <option name="timeStamp" value="69" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
