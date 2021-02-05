@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e66d890e-e955-40ba-868e-9e8dd9958864" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/converter/DefaultSelectFieldsConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/visitors/CusSelectFieldVisitorAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/visitors/CusSelectSQLASTVisitorAdapterImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/rxf113/converter/SelectFieldsTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/Converter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/DefaultSelectConverter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/Resolver.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/SelectControlObj.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/SelectSqlObjectService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/unit/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/control/FieldsControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rxf113/converter/core/control/FieldsControl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,6 +134,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="451" y="97" width="829" height="583" key="#xdebugger.evaluate/0.0.1280.680@0.0.1280.680" timestamp="1612494705844" />
+    <state x="263" y="0" key="CommitChangelistDialog2" timestamp="1612518416928">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="263" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1612518416928" />
     <state width="684" height="438" key="DebuggerActiveHint" timestamp="1612512178203">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
