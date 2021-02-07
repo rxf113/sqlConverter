@@ -1,91 +1,28 @@
 package com.rxf113.converter.core.converter;
 
-import com.alibaba.druid.sql.ast.SQLStatement;
-import com.alibaba.druid.sql.dialect.mysql.parser.MySqlStatementParser;
-import com.alibaba.druid.sql.dialect.mysql.visitor.MySqlOutputVisitor;
-import com.alibaba.druid.sql.parser.SQLStatementParser;
-import com.alibaba.druid.sql.visitor.SQLASTOutputVisitor;
-import com.alibaba.druid.sql.visitor.SQLASTVisitorAdapter;
+import com.rxf113.converter.core.control.FieldsControl;
 import com.rxf113.converter.core.enums.FieldControlTypeEnum;
 import com.rxf113.converter.core.unit.Table;
-import com.rxf113.converter.core.control.FieldsControl;
-import com.rxf113.converter.core.visitors.CusSelectFieldVisitorAdapter;
 import com.rxf113.converter.core.visitors.CusSelectSQLASTVisitorAdapterImpl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * 字段查询转换器
- *
  * @author rxf113
  */
-public class DefaultSelectFieldsConverter {
-
-    private SQLStatement sqlStatement;
-
-    private CusSelectFieldVisitorAdapter sqlAstVisitorAdapter;
-
-    private SQLASTOutputVisitor sqlAstOutputVisitor;
-
-    private StringBuilder outSql = new StringBuilder(32);
-
-
-    public DefaultSelectFieldsConverter(CusSelectFieldVisitorAdapter sqlAstVisitorAdapter, SQLASTOutputVisitor sqlAstOutputVisitor) {
-        this.sqlAstVisitorAdapter = sqlAstVisitorAdapter;
-        this.sqlAstOutputVisitor = sqlAstOutputVisitor;
-    }
+public class DefaultSelectFieldsConverter extends AbstractConverter<List<FieldsControl>, Map<FieldControlTypeEnum, List<String>>> {
 
     public DefaultSelectFieldsConverter() {
-        sqlAstVisitorAdapter = new CusSelectSQLASTVisitorAdapterImpl();
-        sqlAstOutputVisitor = new MySqlOutputVisitor(outSql);
+        super(new CusSelectSQLASTVisitorAdapterImpl());
     }
 
-    public String convertSql(String sql,List<FieldsControl> fieldsControls){
-        DefaultSelectFieldsConverter converter = new DefaultSelectFieldsConverter();
-        converter.initSqlStatement(sql);
-
-        List<Table> tables = converter.getTables();
-
-        Map<FieldControlTypeEnum, List<String>> assembledFields = converter.findAssembledFields(fieldsControls, tables);
-        converter.resolveFields(assembledFields);
-        return converter.getConvertedSql();
-    }
-
-
-    private void initSqlStatement(String sqlStr) {
-        SQLStatementParser parser = new MySqlStatementParser(sqlStr);
-        this.sqlStatement = parser.parseStatement();
-    }
-
-    public String getConvertedSql(){
-        sqlStatement.accept(sqlAstOutputVisitor);
-        return outSql.toString();
-    }
-
-    /**
-     * 表信息
-     *
-     * @param visitorAdapter visitor
-     * @return void
-     **/
-    public List<Table> getTables(CusSelectFieldVisitorAdapter visitorAdapter) {
-        sqlStatement.accept(visitorAdapter);
-        return visitorAdapter.getTables();
-    }
-
-    public List<Table> getTables() {
-        return getTables(sqlAstVisitorAdapter);
-    }
-
-
-    public void resolveFields(Map<FieldControlTypeEnum, List<String>> assembledFields, CusSelectFieldVisitorAdapter visitorAdapter) {
-        visitorAdapter.setAssembledFields(assembledFields);
-        sqlStatement.accept(visitorAdapter);
-    }
-
-    public void resolveFields(Map<FieldControlTypeEnum, List<String>> assembledFields) {
-        resolveFields(assembledFields, this.sqlAstVisitorAdapter);
+    @Override
+    public Map<FieldControlTypeEnum, List<String>> resolveControlAndTables(List<Table> tables, List<FieldsControl> controls) {
+        return findAssembledFields(controls, tables);
     }
 
     /**

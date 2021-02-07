@@ -1,32 +1,29 @@
 package com.rxf113.converter;
 
-import com.alibaba.druid.sql.SQLUtils;
-import com.alibaba.druid.sql.ast.SQLStatement;
-import com.alibaba.druid.sql.ast.statement.SQLExprTableSource;
-import com.alibaba.druid.sql.ast.statement.SQLTableSource;
-import com.alibaba.druid.sql.dialect.mysql.parser.MySqlStatementParser;
-import com.alibaba.druid.sql.dialect.mysql.visitor.MySqlASTVisitorAdapter;
-import com.alibaba.druid.util.JdbcConstants;
 import com.rxf113.converter.core.control.FieldsControl;
 import com.rxf113.converter.core.converter.DefaultSelectFieldsConverter;
 import com.rxf113.converter.core.enums.FieldControlTypeEnum;
-import com.rxf113.converter.core.visitors.CusSelectSQLASTVisitorAdapterImpl;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
+ * 动态查询字段测试
+ *
  * @author rxf113
  */
 
 public class SelectFieldsTest {
 
     @Test
-    public void testSelectFields(){
+    public void testSelectFields() {
 
         //排除的字段
         FieldsControl control = new FieldsControl();
-        control.setTableName("di");;
+        control.setTableName("di");
         control.setFields(Collections.singletonList("id"));
         //no
         control.setFieldControlTypeEnum(FieldControlTypeEnum.EXCLUDE);
@@ -39,7 +36,7 @@ public class SelectFieldsTest {
         control2.setFieldControlTypeEnum(FieldControlTypeEnum.INCLUDE);
 
         //控制集
-        List<FieldsControl> fieldsControls = new ArrayList<>(Arrays.asList(control,control2));
+        List<FieldsControl> fieldsControls = new ArrayList<>(Arrays.asList(control, control2));
 
         //原始sql
         String originSql = "select (select a,id,c from jkl) as df,di.id from di_two dt join di di ON dt.parent_id = di.parent_id where di.id = 10 \n" +
