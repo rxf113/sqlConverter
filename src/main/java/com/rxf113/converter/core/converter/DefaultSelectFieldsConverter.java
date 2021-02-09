@@ -6,7 +6,6 @@ import com.rxf113.converter.core.unit.Table;
 import com.rxf113.converter.core.visitors.CusSelectSQLASTVisitorAdapterImpl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,7 +32,7 @@ public class DefaultSelectFieldsConverter extends AbstractConverter<List<FieldsC
      * @return Map<Integer, List < String>> key:type  val:组装字段集
      **/
     public Map<FieldControlTypeEnum, List<String>> findAssembledFields(List<FieldsControl> fieldsControls, List<Table> tables) {
-        Map<FieldControlTypeEnum, List<FieldsControl>> fieldsControlMap = fieldsControls.stream().peek(fieldsControl -> {
+        return fieldsControls.stream().peek(fieldsControl -> {
             String tableName = fieldsControl.getTableName();
             //根据表名找到表信息
             List<Table> tableList = tables.stream().filter(table -> table.getTableName().equals(tableName)).collect(Collectors.toList());
@@ -46,12 +45,7 @@ public class DefaultSelectFieldsConverter extends AbstractConverter<List<FieldsC
                 treatedFields.addAll(cuTreatedFields);
             });
             fieldsControl.setFields(treatedFields);
-        }).collect(Collectors.groupingBy(FieldsControl::getFieldControlTypeEnum));
-
-        Map<FieldControlTypeEnum, List<String>> resultMap = new HashMap<>(2, 1);
-        fieldsControlMap.forEach((k, v) -> {
-            resultMap.put(k, v.stream().flatMap(i -> i.getFields().stream()).distinct().collect(Collectors.toList()));
-        });
-        return resultMap;
+        }).collect(Collectors.groupingBy(FieldsControl::getFieldControlTypeEnum, Collectors.collectingAndThen(Collectors.toList(), k -> k.stream().
+                flatMap(j -> j.getFields().stream()).collect(Collectors.toList()))));
     }
 }
