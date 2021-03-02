@@ -18,7 +18,7 @@ import java.util.*;
  *
  * @author rxf113
  */
-public class CusSelectSQLASTVisitorAdapterImpl extends SQLASTVisitorAdapter implements CusSelectFieldVisitorAdapter {
+public class CusSelectSQLASTVisitorAdapterImpl extends SQLASTVisitorAdapter implements CusConditionVisitorAdapter<Map<FieldControlTypeEnum, List<String>>> {
 
     private Map<FieldControlTypeEnum, List<String>> assembledFields;
 
@@ -26,7 +26,7 @@ public class CusSelectSQLASTVisitorAdapterImpl extends SQLASTVisitorAdapter impl
     }
 
     @Override
-    public void setAssembledFields(Map<FieldControlTypeEnum, List<String>> assembledFields) {
+    public void setControlInfo(Map<FieldControlTypeEnum, List<String>> assembledFields) {
         this.assembledFields = assembledFields;
     }
 
@@ -72,6 +72,7 @@ public class CusSelectSQLASTVisitorAdapterImpl extends SQLASTVisitorAdapter impl
      */
     @Override
     public boolean visit(SQLSelectQueryBlock x) {
+
         if (assembledFields == null) {
             return true;
         }

@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author rxf113
  */
-public interface CusSelectFieldVisitorAdapter extends SQLASTVisitor {
+public interface CusConditionVisitorAdapter<T> extends SQLASTVisitor {
     /**
      * 获取表信息
      * @return 表信息
@@ -23,5 +23,5 @@ public interface CusSelectFieldVisitorAdapter extends SQLASTVisitor {
      * 设置组装字段集
      * @param assembledFields 字段集
      */
-    void setAssembledFields(Map<FieldControlTypeEnum, List<String>> assembledFields);
+    void setControlInfo(T assembledFields);
 }
