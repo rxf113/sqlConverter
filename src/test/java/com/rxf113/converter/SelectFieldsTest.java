@@ -47,6 +47,7 @@ public class SelectFieldsTest {
 
         DefaultSelectFieldsConverter selectFieldsConverter = new DefaultSelectFieldsConverter();
         String convertedSql = selectFieldsConverter.convertSql(originSql, fieldsControls);
-        System.out.println(convertedSql);
+        System.out.println("originSql: " + originSql);
+        System.out.println("\n\nconvertedSql: " + convertedSql);
     }
 }
