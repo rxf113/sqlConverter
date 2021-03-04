@@ -39,7 +39,7 @@ public class SelectFieldsTest {
         List<FieldsControl> fieldsControls = new ArrayList<>(Arrays.asList(control, control2));
 
         //原始sql
-        String originSql = "select (select a,id,c from jkl) as df,di.id from di_two dt join di di ON dt.parent_id = di.parent_id where di.id = 10 \n" +
+        String originSql = "select count(id), (select a,id,c from jkl) as df,di.id from di_two dt join di di ON dt.parent_id = di.parent_id where di.id = 10 \n" +
                 "GROUP BY di.id ";
 
         DefaultSelectFieldsConverter selectFieldsConverter = new DefaultSelectFieldsConverter();
