@@ -103,7 +103,7 @@ public class CusSelectSQLASTVisitorAdapterImpl extends SQLASTVisitorAdapter impl
                 flag = queryExpr.getSubQuery().getQueryBlock().getSelectList().size() == 0;
             } else if (expr instanceof SQLAggregateExpr) {
                 SQLAggregateExpr aggregateExpr = (SQLAggregateExpr) expr;
-                //聚合函数处理
+                //                //聚合函数处理
                 visit(aggregateExpr);
                 flag = aggregateExpr.getArguments().size() == 0;
             }
