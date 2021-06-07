@@ -8,7 +8,5 @@ package com.rxf113.converter.core.processor;
  */
 public abstract class AbstractWithControlVisitorProcessor<T> implements VisitorProcessor {
 
-    public void setControlObj(T controlObj) {
-
-    }
+    public abstract void setControlObj(T controlObj);
 }

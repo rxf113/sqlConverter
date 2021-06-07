@@ -143,6 +143,7 @@ public class test {
 
                 sqlBinaryOpExpr.setOperator(SQLBinaryOperator.Equality);
                 expr.addCondition(sqlBinaryOpExpr);
+                expr.addCondition("sb='9'");
             }
 
             //限制查询字段

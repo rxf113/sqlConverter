@@ -25,6 +25,11 @@ public class MysqlConverter extends AbstractConverter {
         super(statementParser, processors);
     }
 
+    public MysqlConverter(
+            List<VisitorProcessor> processors) {
+        super(new MySQLCusStatementParser(), processors);
+    }
+
     @Override
     public String convert(String sql) {
         CusStatementParser statementParser = getStatementParser();
