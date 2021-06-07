@@ -5,6 +5,7 @@ import com.rxf113.converter.core.model.Table;
 import com.rxf113.converter.core.visitor.FieldsControlVisitorAdapter;
 import com.rxf113.converter.core.visitor.GetTableNameAliasVisitorAdapter;
 
+import javax.annotation.processing.Processor;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.Map;
  *
  * @author rxf113
  */
-public class FieldsControlProcessor extends AbstractWithControlVisitorProcessor<Map<String, String>> {
+public class FieldsControlProcessor implements VisitorProcessor {
 
     private GetTableNameAliasVisitorAdapter getTableNameAliasVisitorAdapter;
 
@@ -27,7 +28,6 @@ public class FieldsControlProcessor extends AbstractWithControlVisitorProcessor<
      **/
     private Map<String, String> controlObjMap;
 
-    @Override
     public void setControlObj(Map<String, String> controlObj) {
         this.controlObjMap = controlObj;
     }

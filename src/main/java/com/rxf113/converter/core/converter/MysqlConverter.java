@@ -48,7 +48,9 @@ public class MysqlConverter extends AbstractConverter {
 
     public static MysqlConverter defaultMysqlConverter(Map<String, String> controlObj) {
         CusStatementParser statementParser = new MySQLCusStatementParser();
-        AbstractWithControlVisitorProcessor<Map<String, String>> visitorProcessor = new FieldsControlProcessor(new GetTableNameAliasVisitorAdapter(), new FieldsControlVisitorAdapter());
+        GetTableNameAliasVisitorAdapter getTableNameAliasVisitorAdapter = new GetTableNameAliasVisitorAdapter();
+        FieldsControlVisitorAdapter fieldsControlVisitorAdapter = new FieldsControlVisitorAdapter();
+        FieldsControlProcessor visitorProcessor = new FieldsControlProcessor(getTableNameAliasVisitorAdapter, fieldsControlVisitorAdapter);
         visitorProcessor.setControlObj(controlObj);
         return new MysqlConverter(statementParser, Collections.singletonList(visitorProcessor));
     }

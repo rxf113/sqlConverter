@@ -2,6 +2,7 @@ package com.rxf113.converter.core.demo;
 
 import com.rxf113.converter.core.converter.MysqlConverter;
 import com.rxf113.converter.core.processor.AddConditionVisitorProcessor;
+import com.rxf113.converter.core.visitor.AddConditionCusVisitorAdapter;
 
 import java.util.*;
 
@@ -21,8 +22,9 @@ public class Demo {
         String sqlStr = "select name , math_score , chinese_score , eng_score from student_score where a = 90";
 
         List<String> conditions = Arrays.asList("a=8", "c like '%fff%'");
-        AddConditionVisitorProcessor addConditionVisitorProcessor = new AddConditionVisitorProcessor();
-        addConditionVisitorProcessor.setControlObj(conditions);
+        AddConditionCusVisitorAdapter addConditionCusVisitorAdapter = new AddConditionCusVisitorAdapter();
+        addConditionCusVisitorAdapter.setConditions(conditions);
+        AddConditionVisitorProcessor addConditionVisitorProcessor = new AddConditionVisitorProcessor(addConditionCusVisitorAdapter);
         MysqlConverter mysqlConverter = new MysqlConverter(Collections.singletonList(addConditionVisitorProcessor));
         String convert = mysqlConverter.convert(sqlStr);
         System.out.println(convert);

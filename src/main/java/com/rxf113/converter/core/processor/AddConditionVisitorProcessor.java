@@ -11,11 +11,10 @@ import java.util.List;
  */
 public class AddConditionVisitorProcessor extends AbstractWithControlVisitorProcessor<List<String>> {
 
-    private AddConditionCusVisitorAdapter addConditionCusVisitorAdapter = new AddConditionCusVisitorAdapter();
+    private AddConditionCusVisitorAdapter addConditionCusVisitorAdapter;
 
-    @Override
-    public void setControlObj(List<String> conditions) {
-        addConditionCusVisitorAdapter.setConditions(conditions);
+    public AddConditionVisitorProcessor(AddConditionCusVisitorAdapter addConditionCusVisitorAdapter) {
+        this.addConditionCusVisitorAdapter = addConditionCusVisitorAdapter;
     }
 
     @Override
