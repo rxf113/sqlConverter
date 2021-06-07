@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author rxf113
  */
-public class AddConditionVisitorProcessor extends AbstractWithControlVisitorProcessor<List<String>> {
+public class AddConditionVisitorProcessor implements VisitorProcessor {
 
     private AddConditionCusVisitorAdapter addConditionCusVisitorAdapter;
 
