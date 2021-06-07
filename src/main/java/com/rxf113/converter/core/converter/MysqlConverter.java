@@ -19,6 +19,7 @@ import java.util.Map;
  */
 public class MysqlConverter extends AbstractConverter {
 
+    private static CusStatementParser statementParser = new MySQLCusStatementParser();
 
     public MysqlConverter(CusStatementParser statementParser,
                           List<VisitorProcessor> processors) {
@@ -27,35 +28,7 @@ public class MysqlConverter extends AbstractConverter {
 
     public MysqlConverter(
             List<VisitorProcessor> processors) {
-        super(new MySQLCusStatementParser(), processors);
+        super(statementParser, processors);
     }
 
-    @Override
-    public String convert(String sql) {
-        CusStatementParser statementParser = getStatementParser();
-        List<VisitorProcessor> processors = getProcessors();
-
-        SQLStatement sqlStatement = statementParser.parseStatement(sql);
-        for (VisitorProcessor processor : processors) {
-            processor.process(sqlStatement);
-        }
-        StringBuilder sb = new StringBuilder();
-        MySqlOutputVisitor mySqlOutputVisitor = new MySqlOutputVisitor(sb);
-        sqlStatement.accept(mySqlOutputVisitor);
-        //打印结果sql
-        return sb.toString();
-    }
-
-    public static MysqlConverter defaultMysqlConverter(Map<String, String> controlObj) {
-        CusStatementParser statementParser = new MySQLCusStatementParser();
-        GetTableNameAliasVisitorAdapter getTableNameAliasVisitorAdapter = new GetTableNameAliasVisitorAdapter();
-        FieldsControlVisitorAdapter fieldsControlVisitorAdapter = new FieldsControlVisitorAdapter();
-        FieldsControlProcessor visitorProcessor = new FieldsControlProcessor(getTableNameAliasVisitorAdapter, fieldsControlVisitorAdapter);
-        visitorProcessor.setControlObj(controlObj);
-        return new MysqlConverter(statementParser, Collections.singletonList(visitorProcessor));
-    }
-
-    public static void main(String[] args) {
-
-    }
 }

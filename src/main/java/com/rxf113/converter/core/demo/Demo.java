@@ -1,8 +1,13 @@
 package com.rxf113.converter.core.demo;
 
+import com.rxf113.converter.core.converter.DefaultConverterFactory;
 import com.rxf113.converter.core.converter.MysqlConverter;
+import com.rxf113.converter.core.enums.ControlType;
 import com.rxf113.converter.core.processor.AddConditionVisitorProcessor;
+import com.rxf113.converter.core.processor.FieldsControlProcessor;
 import com.rxf113.converter.core.visitor.AddConditionCusVisitorAdapter;
+import com.rxf113.converter.core.visitor.FieldsControlVisitorAdapter;
+import com.rxf113.converter.core.visitor.GetTableNameAliasVisitorAdapter;
 
 import java.util.*;
 
@@ -12,7 +17,7 @@ import java.util.*;
 public class Demo {
     public static void main(String[] args) {
         Demo demo = new Demo();
-        demo.addConditionTest();
+        demo.testBoth();
         //demo.fieldsControlTest();
     }
 
@@ -20,10 +25,8 @@ public class Demo {
         String sqlStr = "select name , math_score , chinese_score , eng_score from student_score where a = 90";
 
         List<String> conditions = Arrays.asList("a=8", "c like '%fff%'");
-        AddConditionCusVisitorAdapter addConditionCusVisitorAdapter = new AddConditionCusVisitorAdapter();
-        addConditionCusVisitorAdapter.setConditions(conditions);
-        AddConditionVisitorProcessor addConditionVisitorProcessor = new AddConditionVisitorProcessor(addConditionCusVisitorAdapter);
-        MysqlConverter mysqlConverter = new MysqlConverter(Collections.singletonList(addConditionVisitorProcessor));
+
+        MysqlConverter mysqlConverter = DefaultConverterFactory.getDefaultConverter(ControlType.ADD_CONDITION, conditions);
         String convert = mysqlConverter.convert(sqlStr);
         System.out.println(convert);
     }
@@ -37,9 +40,25 @@ public class Demo {
         //排除此表字段
         fieldsControlMap.put("student_score", "name,math_score");
 
-        MysqlConverter defaultMysqlConverter = MysqlConverter.defaultMysqlConverter(fieldsControlMap);
-
-        String convertedSql = defaultMysqlConverter.convert(sqlStr);
+        MysqlConverter mysqlConverter = DefaultConverterFactory.getDefaultConverter(ControlType.FIELDS_CONTROL, fieldsControlMap);
+        String convertedSql = mysqlConverter.convert(sqlStr);
         System.out.println(convertedSql);
+    }
+
+    public void testBoth(){
+        String sqlStr = "select name , math_score , chinese_score , eng_score from student_score where a = 90";
+
+
+        List<String> conditions = Arrays.asList("a=8", "c like '%fff%'");
+
+
+
+        Map<String, String> fieldsControlMap = new HashMap<>(2, 1);
+        //排除此表字段
+        fieldsControlMap.put("student_score", "name,math_score");
+
+        MysqlConverter mysqlConverter = DefaultConverterFactory.getDefaultConverter(ControlType.ALL, conditions, fieldsControlMap);
+        String convert = mysqlConverter.convert(sqlStr);
+        System.out.println(convert);
     }
 }
