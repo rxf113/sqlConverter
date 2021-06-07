@@ -1,8 +1,8 @@
-package com.rxf113.converter.core.converter;
+package com.rxf113.converter.old.converter;
 
-import com.rxf113.converter.core.control.ConditionControl;
-import com.rxf113.converter.core.unit.Table;
-import com.rxf113.converter.core.visitors.CusAddConditionAdapterImpl;
+import com.rxf113.converter.core.model.Table;
+import com.rxf113.converter.old.control.ConditionControl;
+import com.rxf113.converter.old.visitors.CusAddConditionAdapterImpl;
 
 import java.util.HashMap;
 import java.util.List;

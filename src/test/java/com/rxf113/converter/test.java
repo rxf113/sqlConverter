@@ -1,7 +1,5 @@
 package com.rxf113.converter;
 
-import com.alibaba.druid.DbType;
-import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.ast.expr.SQLBinaryOpExpr;
 import com.alibaba.druid.sql.ast.expr.SQLBinaryOperator;
@@ -16,12 +14,8 @@ import com.alibaba.druid.sql.dialect.mysql.visitor.MySqlOutputVisitor;
 import com.alibaba.druid.sql.dialect.oracle.parser.OracleStatementParser;
 import com.alibaba.druid.sql.dialect.oracle.visitor.OracleOutputVisitor;
 import com.alibaba.druid.sql.parser.SQLStatementParser;
-import net.sf.cglib.proxy.Enhancer;
-import net.sf.cglib.proxy.MethodInterceptor;
-import net.sf.cglib.proxy.MethodProxy;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -58,7 +52,7 @@ public class test {
     @Test
     public void test() {
         //select name , math_score , chinese_score , eng_score from student_score
-        String sqlStr = "select name , math_score , chinese_score , eng_score from student_score";
+        String sqlStr = "select name , math_score , chinese_score , eng_score from student_score where a = 90";
         System.out.printf("原始sql: %s \n\n", sqlStr);
 
         //以chineseTeacher为例
@@ -130,15 +124,6 @@ public class test {
 //            return true;
 //        }
 
-        public static void main(String[] args) {
-            SQLStatement sqlStatement = SQLUtils.parseSingleStatement("c = 1", DbType.mysql, true);
-            System.out.println(123);
-        }
-        @Test
-        public void fd(){
-
-        }
-
         public boolean visit(SQLSelectQueryBlock expr) {
             //添加 teacherType
             //判断 如果from语句中存在这个表 添加where
@@ -170,33 +155,5 @@ public class test {
 //        public Map<String, SQLTableSource> getAliasMap() {
 //            return aliasMap;
 //        }
-    }
-
-    @Test
-    public void cglib() {
-        CgProxy cgProxy = new CgProxy();
-        Enhancer enhancer = new Enhancer();
-        enhancer.setSuperclass(Cg.class);
-        enhancer.setCallback(cgProxy);
-        Cg cg = (Cg) enhancer.create();
-        cg.print();
-    }
-    static class Cg{
-        public void print(){
-            System.out.println(123);
-        }
-    }
-
-    static class CgProxy implements MethodInterceptor {
-
-        private Cg cg = new Cg();
-
-        @Override
-        public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-            // 这里增强
-            Object invoke = method.invoke(cg);
-            System.out.println("收钱");
-            return methodProxy.invokeSuper(o, objects);
-        }
     }
 }

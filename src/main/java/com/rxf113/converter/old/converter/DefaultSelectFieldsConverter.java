@@ -1,9 +1,9 @@
-package com.rxf113.converter.core.converter;
+package com.rxf113.converter.old.converter;
 
-import com.rxf113.converter.core.control.FieldsControl;
-import com.rxf113.converter.core.enums.FieldControlTypeEnum;
-import com.rxf113.converter.core.unit.Table;
-import com.rxf113.converter.core.visitors.CusSelectSQLASTVisitorAdapterImpl;
+import com.rxf113.converter.core.model.Table;
+import com.rxf113.converter.old.control.FieldsControl;
+import com.rxf113.converter.old.enums.FieldControlTypeEnum;
+import com.rxf113.converter.old.visitors.CusSelectSQLASTVisitorAdapterImpl;
 
 import java.util.ArrayList;
 import java.util.List;

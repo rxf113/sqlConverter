@@ -1,4 +1,4 @@
-package com.rxf113.converter.core.visitors;
+package com.rxf113.converter.old.visitors;
 
 import com.alibaba.druid.sql.ast.SQLExpr;
 import com.alibaba.druid.sql.ast.expr.SQLAggregateExpr;
@@ -9,8 +9,8 @@ import com.alibaba.druid.sql.ast.statement.SQLExprTableSource;
 import com.alibaba.druid.sql.ast.statement.SQLSelectItem;
 import com.alibaba.druid.sql.ast.statement.SQLSelectQueryBlock;
 import com.alibaba.druid.sql.visitor.SQLASTVisitorAdapter;
-import com.rxf113.converter.core.enums.FieldControlTypeEnum;
-import com.rxf113.converter.core.unit.Table;
+import com.rxf113.converter.core.model.Table;
+import com.rxf113.converter.old.enums.FieldControlTypeEnum;
 
 import java.util.ArrayList;
 import java.util.List;

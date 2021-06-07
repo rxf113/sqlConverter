@@ -1,11 +1,9 @@
-package com.rxf113.converter.core.visitors;
+package com.rxf113.converter.old.visitors;
 
 import com.alibaba.druid.sql.visitor.SQLASTVisitor;
-import com.rxf113.converter.core.enums.FieldControlTypeEnum;
-import com.rxf113.converter.core.unit.Table;
+import com.rxf113.converter.core.model.Table;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 自定义的接口 扩展两个方法

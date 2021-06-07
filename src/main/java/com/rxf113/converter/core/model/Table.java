@@ -1,4 +1,4 @@
-package com.rxf113.converter.core.unit;
+package com.rxf113.converter.core.model;
 
 /**
  * 表的基本信息

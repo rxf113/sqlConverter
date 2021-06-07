@@ -1,4 +1,4 @@
-package com.rxf113.converter.core.visitors;
+package com.rxf113.converter.old.visitors;
 
 import com.alibaba.druid.sql.ast.expr.SQLBinaryOpExpr;
 import com.alibaba.druid.sql.ast.expr.SQLIdentifierExpr;
@@ -7,8 +7,8 @@ import com.alibaba.druid.sql.ast.statement.SQLSelectItem;
 import com.alibaba.druid.sql.ast.statement.SQLSelectQueryBlock;
 import com.alibaba.druid.sql.ast.statement.SQLTableSource;
 import com.alibaba.druid.sql.visitor.SQLASTVisitorAdapter;
-import com.rxf113.converter.core.control.ConditionControl;
-import com.rxf113.converter.core.unit.Table;
+import com.rxf113.converter.core.model.Table;
+import com.rxf113.converter.old.control.ConditionControl;
 
 import java.util.ArrayList;
 import java.util.List;
