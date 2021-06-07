@@ -14,8 +14,6 @@ public class Demo {
         Demo demo = new Demo();
         demo.addConditionTest();
         //demo.fieldsControlTest();
-
-
     }
 
     public void addConditionTest() {
