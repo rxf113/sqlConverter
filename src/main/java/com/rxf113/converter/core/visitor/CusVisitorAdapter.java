@@ -1,6 +1,5 @@
 package com.rxf113.converter.core.visitor;
 
-import com.alibaba.druid.sql.ast.statement.SQLJoinTableSource;
 import com.alibaba.druid.sql.visitor.SQLASTVisitor;
 
 /**

@@ -11,16 +11,14 @@ import java.util.List;
  */
 public class MysqlConverter extends AbstractConverter {
 
-    private static CusStatementParser statementParser = new MySQLCusStatementParser();
-
-    public MysqlConverter(CusStatementParser statementParser,
-                          List<VisitorProcessor> processors) {
-        super(statementParser, processors);
+    public MysqlConverter(CusStatementParser statementParser, List<VisitorProcessor> processors) {
+        this.statementParser = statementParser;
+        this.processors = processors;
     }
 
-    public MysqlConverter(
-            List<VisitorProcessor> processors) {
-        super(statementParser, processors);
+    public MysqlConverter(List<VisitorProcessor> processors) {
+        this.statementParser = new MySQLCusStatementParser();
+        this.processors = processors;
     }
 
 }

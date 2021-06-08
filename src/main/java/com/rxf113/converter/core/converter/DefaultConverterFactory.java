@@ -7,7 +7,10 @@ import com.rxf113.converter.core.visitor.AddConditionCusVisitorAdapter;
 import com.rxf113.converter.core.visitor.FieldsControlVisitorAdapter;
 import com.rxf113.converter.core.visitor.GetTableNameAliasVisitorAdapter;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author rxf113

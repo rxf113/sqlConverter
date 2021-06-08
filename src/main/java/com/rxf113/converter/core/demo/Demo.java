@@ -3,13 +3,11 @@ package com.rxf113.converter.core.demo;
 import com.rxf113.converter.core.converter.DefaultConverterFactory;
 import com.rxf113.converter.core.converter.MysqlConverter;
 import com.rxf113.converter.core.enums.ControlType;
-import com.rxf113.converter.core.processor.AddConditionVisitorProcessor;
-import com.rxf113.converter.core.processor.FieldsControlProcessor;
-import com.rxf113.converter.core.visitor.AddConditionCusVisitorAdapter;
-import com.rxf113.converter.core.visitor.FieldsControlVisitorAdapter;
-import com.rxf113.converter.core.visitor.GetTableNameAliasVisitorAdapter;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author rxf113

@@ -14,16 +14,15 @@ import java.util.List;
  */
 public abstract class AbstractConverter implements Converter {
 
-
     /**
      * 自定义解析器
      */
-    private CusStatementParser statementParser;
+    protected CusStatementParser statementParser;
 
     /**
      * processor集合
      */
-    private List<VisitorProcessor> processors;
+    protected List<VisitorProcessor> processors;
 
     @Override
     public String convert(String sql) {
@@ -39,18 +38,4 @@ public abstract class AbstractConverter implements Converter {
         sqlStatement.accept(mySqlOutputVisitor);
         return sb.toString();
     }
-
-    public AbstractConverter(CusStatementParser statementParser, List<VisitorProcessor> processors) {
-        this.statementParser = statementParser;
-        this.processors = processors;
-    }
-
-    public CusStatementParser getStatementParser() {
-        return statementParser;
-    }
-
-    public List<VisitorProcessor> getProcessors() {
-        return processors;
-    }
-
 }
