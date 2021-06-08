@@ -1,16 +1,5 @@
 package com.rxf113.converter.core.converter;
 
-import com.alibaba.druid.sql.ast.SQLStatement;
-import com.alibaba.druid.sql.dialect.mysql.parser.MySqlStatementParser;
-import com.rxf113.converter.core.enums.ControlType;
-import com.rxf113.converter.core.processor.VisitorProcessor;
-import com.rxf113.converter.core.statement.CusStatementParser;
-import com.rxf113.converter.core.statement.MySQLCusStatementParser;
-import com.rxf113.converter.core.visitor.output.CusMysqlOutPutVisitor;
-import com.rxf113.converter.core.visitor.output.CusOutPutVisitor;
-
-import java.util.List;
-
 /**
  * 打印sql代理
  *
