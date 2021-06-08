@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * @author rxf113
  */
-public class DefaultConverterFactory {
+public class DefaultMySqlConverterFactory {
 
     @SuppressWarnings("unchecked")
     public static MysqlConverter getDefaultConverter(ControlType controlType, Object... controlObj) {
