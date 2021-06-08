@@ -1,9 +1,10 @@
 package com.rxf113.converter.core.converter;
 
 import com.alibaba.druid.sql.ast.SQLStatement;
-import com.alibaba.druid.sql.dialect.mysql.visitor.MySqlOutputVisitor;
+import com.alibaba.druid.sql.visitor.SQLASTOutputVisitor;
 import com.rxf113.converter.core.processor.VisitorProcessor;
 import com.rxf113.converter.core.statement.CusStatementParser;
+import com.rxf113.converter.core.visitor.output.CusOutPutVisitor;
 
 import java.util.List;
 
@@ -24,6 +25,11 @@ public abstract class AbstractConverter implements Converter {
      */
     protected List<VisitorProcessor> processors;
 
+    /**
+     * OutPutVisitor
+     */
+    protected CusOutPutVisitor cusOutPutVisitor;
+
     @Override
     public String convert(String sql) {
         CusStatementParser statementParser = this.statementParser;
@@ -33,9 +39,8 @@ public abstract class AbstractConverter implements Converter {
         for (VisitorProcessor processor : processors) {
             processor.process(sqlStatement);
         }
-        StringBuilder sb = new StringBuilder();
-        MySqlOutputVisitor mySqlOutputVisitor = new MySqlOutputVisitor(sb);
-        sqlStatement.accept(mySqlOutputVisitor);
-        return sb.toString();
+        SQLASTOutputVisitor outputVisitor = cusOutPutVisitor.getOutputVisitor();
+        sqlStatement.accept(outputVisitor);
+        return cusOutPutVisitor.getSql();
     }
 }

@@ -1,7 +1,8 @@
 package com.rxf113.converter.core.demo;
 
-import com.rxf113.converter.core.converter.DefaultConverterFactory;
+import com.rxf113.converter.core.converter.DefaultMySqlConverterFactory;
 import com.rxf113.converter.core.converter.MysqlConverter;
+import com.rxf113.converter.core.converter.MysqlConverterPrintProxy;
 import com.rxf113.converter.core.enums.ControlType;
 
 import java.util.Arrays;
@@ -25,9 +26,9 @@ public class Demo {
 
         List<String> conditions = Arrays.asList("a=8", "c like '%fff%'");
 
-        MysqlConverter mysqlConverter = DefaultConverterFactory.getDefaultConverter(ControlType.ADD_CONDITION, conditions);
-        String convert = mysqlConverter.convert(sqlStr);
-        System.out.println(convert);
+        MysqlConverter mysqlConverter = DefaultMySqlConverterFactory.getDefaultConverter(ControlType.ADD_CONDITION, conditions);
+        MysqlConverterPrintProxy converterPrintProxy = new MysqlConverterPrintProxy(mysqlConverter);
+        converterPrintProxy.convert(sqlStr);
     }
 
     public void fieldsControlTest() {
@@ -39,9 +40,9 @@ public class Demo {
         //排除此表字段
         fieldsControlMap.put("student_score", "name,math_score");
 
-        MysqlConverter mysqlConverter = DefaultConverterFactory.getDefaultConverter(ControlType.FIELDS_CONTROL, fieldsControlMap);
-        String convertedSql = mysqlConverter.convert(sqlStr);
-        System.out.println(convertedSql);
+        MysqlConverter mysqlConverter = DefaultMySqlConverterFactory.getDefaultConverter(ControlType.FIELDS_CONTROL, fieldsControlMap);
+        MysqlConverterPrintProxy converterPrintProxy = new MysqlConverterPrintProxy(mysqlConverter);
+        converterPrintProxy.convert(sqlStr);
     }
 
     public void testBoth(){
@@ -56,8 +57,8 @@ public class Demo {
         //排除此表字段
         fieldsControlMap.put("student_score", "name,math_score");
 
-        MysqlConverter mysqlConverter = DefaultConverterFactory.getDefaultConverter(ControlType.ALL, conditions, fieldsControlMap);
-        String convert = mysqlConverter.convert(sqlStr);
-        System.out.println(convert);
+        MysqlConverter mysqlConverter = DefaultMySqlConverterFactory.getDefaultConverter(ControlType.ALL, conditions, fieldsControlMap);
+        MysqlConverterPrintProxy converterPrintProxy = new MysqlConverterPrintProxy(mysqlConverter);
+        converterPrintProxy.convert(sqlStr);
     }
 }
