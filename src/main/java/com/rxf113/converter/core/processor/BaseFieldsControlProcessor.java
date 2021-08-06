@@ -5,36 +5,26 @@ import com.rxf113.converter.core.model.Table;
 import com.rxf113.converter.core.visitor.FieldsControlVisitorAdapter;
 import com.rxf113.converter.core.visitor.GetTableNameAliasVisitorAdapter;
 
-import javax.annotation.processing.Processor;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 /**
- * 控制查询字段
- * 控制类型为Map<String,Object>  表名 -> 需要排除的字段
+ * 基础实现 支持Map<String, String>是控制集
  *
  * @author rxf113
  */
-public class FieldsControlProcessor implements VisitorProcessor {
+public class BaseFieldsControlProcessor extends AbstractFieldsControlProcessor<Map<String, String>, HashSet<String>> {
 
-    private GetTableNameAliasVisitorAdapter getTableNameAliasVisitorAdapter;
+    protected GetTableNameAliasVisitorAdapter getTableNameAliasVisitorAdapter;
 
-    private FieldsControlVisitorAdapter fieldsControlVisitorAdapter;
+    protected FieldsControlVisitorAdapter fieldsControlVisitorAdapter;
 
-    /**
-     * 表名 -> 需要排除的字段
-     **/
-    private Map<String, String> controlObjMap;
-
-    public void setControlObj(Map<String, String> controlObj) {
-        this.controlObjMap = controlObj;
-    }
-
-    public FieldsControlProcessor(GetTableNameAliasVisitorAdapter getTableNameAliasVisitorAdapter, FieldsControlVisitorAdapter fieldsControlVisitorAdapter) {
+    public BaseFieldsControlProcessor(GetTableNameAliasVisitorAdapter getTableNameAliasVisitorAdapter, FieldsControlVisitorAdapter fieldsControlVisitorAdapter, Map<String, String> controlObj) {
         this.getTableNameAliasVisitorAdapter = getTableNameAliasVisitorAdapter;
         this.fieldsControlVisitorAdapter = fieldsControlVisitorAdapter;
+        this.controlObj = controlObj;
     }
 
 
@@ -45,13 +35,14 @@ public class FieldsControlProcessor implements VisitorProcessor {
         List<Table> tables = getTableNameAliasVisitorAdapter.getTables();
 
         //组装需要排除的字段 , 表名-字段 & 别名-字段
-        HashSet<String> assembledFields = findAssembledFields(tables, controlObjMap);
+        HashSet<String> assembledFields = findAssembledFields(tables, controlObj);
 
         //根据表名别名组装字段 order.name  o.name
         fieldsControlVisitorAdapter.setAssembledFields(assembledFields);
         statement.accept(fieldsControlVisitorAdapter);
     }
 
+    @Override
     public HashSet<String> findAssembledFields(List<Table> tables, Map<String, String> controlObjMap) {
         HashSet<String> assembledFields = new HashSet<>();
         tables.forEach(table -> {

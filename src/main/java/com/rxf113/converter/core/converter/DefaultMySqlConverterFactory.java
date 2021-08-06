@@ -2,17 +2,20 @@ package com.rxf113.converter.core.converter;
 
 import com.rxf113.converter.core.enums.ControlType;
 import com.rxf113.converter.core.processor.AddConditionVisitorProcessor;
-import com.rxf113.converter.core.processor.FieldsControlProcessor;
+import com.rxf113.converter.core.processor.BaseFieldsControlProcessor;
 import com.rxf113.converter.core.visitor.AddConditionCusVisitorAdapter;
 import com.rxf113.converter.core.visitor.FieldsControlVisitorAdapter;
 import com.rxf113.converter.core.visitor.GetTableNameAliasVisitorAdapter;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author rxf113
  */
-public class DefaultConverterFactory {
+public class DefaultMySqlConverterFactory {
 
     @SuppressWarnings("unchecked")
     public static MysqlConverter getDefaultConverter(ControlType controlType, Object... controlObj) {
@@ -26,8 +29,7 @@ public class DefaultConverterFactory {
                 case FIELDS_CONTROL:
                     GetTableNameAliasVisitorAdapter getTableNameAliasVisitorAdapter = new GetTableNameAliasVisitorAdapter();
                     FieldsControlVisitorAdapter fieldsControlVisitorAdapter = new FieldsControlVisitorAdapter();
-                    FieldsControlProcessor visitorProcessor = new FieldsControlProcessor(getTableNameAliasVisitorAdapter, fieldsControlVisitorAdapter);
-                    visitorProcessor.setControlObj(castObj(controlObj[0], Map.class));
+                    BaseFieldsControlProcessor visitorProcessor = new BaseFieldsControlProcessor(getTableNameAliasVisitorAdapter, fieldsControlVisitorAdapter, castObj(controlObj[0], Map.class));
                     return new MysqlConverter(Collections.singletonList(visitorProcessor));
                 default:
                     throw new RuntimeException("输入有误");
@@ -38,8 +40,7 @@ public class DefaultConverterFactory {
             AddConditionVisitorProcessor addConditionVisitorProcessor = new AddConditionVisitorProcessor(addConditionCusVisitorAdapter);
             GetTableNameAliasVisitorAdapter getTableNameAliasVisitorAdapter = new GetTableNameAliasVisitorAdapter();
             FieldsControlVisitorAdapter fieldsControlVisitorAdapter = new FieldsControlVisitorAdapter();
-            FieldsControlProcessor visitorProcessor = new FieldsControlProcessor(getTableNameAliasVisitorAdapter, fieldsControlVisitorAdapter);
-            visitorProcessor.setControlObj(castObj(controlObj[1], Map.class));
+            BaseFieldsControlProcessor visitorProcessor = new BaseFieldsControlProcessor(getTableNameAliasVisitorAdapter, fieldsControlVisitorAdapter, castObj(controlObj[1], Map.class));
             return new MysqlConverter(Arrays.asList(visitorProcessor, addConditionVisitorProcessor));
         }
 
