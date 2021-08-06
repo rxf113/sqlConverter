@@ -1,5 +1,6 @@
 package com.rxf113.converter;
 
+import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.ast.expr.SQLBinaryOpExpr;
 import com.alibaba.druid.sql.ast.expr.SQLBinaryOperator;
@@ -14,6 +15,8 @@ import com.alibaba.druid.sql.dialect.mysql.visitor.MySqlOutputVisitor;
 import com.alibaba.druid.sql.dialect.oracle.parser.OracleStatementParser;
 import com.alibaba.druid.sql.dialect.oracle.visitor.OracleOutputVisitor;
 import com.alibaba.druid.sql.parser.SQLStatementParser;
+import com.alibaba.druid.util.JdbcConstants;
+import org.junit.jupiter.api.Test;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -114,7 +117,7 @@ public class test {
 //        }
 
 
-//        public boolean visit(SQLBinaryOpExpr expr) {
+        //        public boolean visit(SQLBinaryOpExpr expr) {
 //            SQLExpr right = expr.getRight();
 //            if(right instanceof SQLValuableExpr){
 //                System.out.println(123);
